@@ -1,5 +1,6 @@
 const pathGen = require('../../utils/pathGen');
 const actions = require('../../utils/actions');
+const prompts = require('../../prompts/react.site');
 
 const pathPrefix = './generators/react.site/templates/';
 const name = 'react.app';
@@ -9,22 +10,7 @@ module.exports = ({ dir }) => ({
   name,
   properties: {
     description,
-    prompts: [
-      {
-        type: "input",
-        name: "projectName",
-        message: "What is the name of your project?",
-        validate: value => {
-          if (/.+/.test(value)) return true;
-          return 'Project name is required';
-        },
-      },
-      {
-        type: "confirm",
-        name: "isRedux",
-        message: "Should this react app have Redux?"
-      },
-    ],
+    prompts,
     actions: data => {
       const filePath = pathGen(dir !== 'src' ? dir : '/');
       const { isRedux } = data;

@@ -1,5 +1,11 @@
 {
   "name": "{{dashCase projectName}}",
+  {{#if projectDescription}}
+  "description": "{{projectDescription}}",
+  {{/if}}
+  {{#if projectAuthor}}
+  "author": "{{projectAuthor}}",
+  {{/if}}
   "version": "0.1.0",
   "private": true,
   "dependencies": {

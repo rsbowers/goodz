@@ -1,5 +1,6 @@
 const pathGen = require('../../utils/pathGen');
 const actions = require('../../utils/actions');
+const prompts = require('../../prompts/gatsby.site');
 
 const pathPrefix = './generators/gatsby.site/templates/';
 const name = 'gatsby.app';
@@ -9,40 +10,7 @@ module.exports = ({ dir }) => ({
   name,
   properties: {
     description,
-    prompts: [
-      {
-        type: "input",
-        name: "projectName",
-        message: "What is the name of your project?",
-        validate: value => {
-          if (/.+/.test(value)) return true;
-          return 'Project name is required';
-        },
-      },
-      {
-        type: "confirm",
-        name: "isContentful",
-        message: "Do you want to use Contentful as a source?"
-      },
-      {
-        when: (response) => {
-          return response.isContentful
-        },
-        type: 'input',
-        name: 'contentfulToken',
-        message: 'What is your Contentful API Token?',
-        default: 'CONTENTFUL_TOKEN',
-      },
-      {
-        when: (response) => {
-          return response.isContentful
-        },
-        type: 'input',
-        name: 'contentfulSpace',
-        message: 'What is your Contentful Space ID?',
-        default: 'CONTENTFUL_SPACE',
-      }
-    ],
+    prompts,
     actions: () => {
       const filePath = pathGen(dir !== 'src' ? dir : '/');
 
